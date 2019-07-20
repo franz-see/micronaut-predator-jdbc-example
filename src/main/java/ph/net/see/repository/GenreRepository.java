@@ -3,6 +3,7 @@ package ph.net.see.repository;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.jdbc.annotation.JdbcRepository;
+import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.data.repository.CrudRepository;
 import ph.net.see.model.Book;
@@ -30,7 +31,7 @@ public interface GenreRepository extends CrudRepository<Genre, Long> {
 
     void deleteById(@Id @NonNull @NotNull Long id);
 
-    List<Genre> findAll(@NotNull Pageable pageable);
+    Page<Genre> findAll(@NotNull Pageable pageable);
 
     void update(@Id Long id, @NotBlank String name);
 

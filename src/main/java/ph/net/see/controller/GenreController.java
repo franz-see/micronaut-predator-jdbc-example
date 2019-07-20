@@ -1,5 +1,6 @@
 package ph.net.see.controller;
 
+import io.micronaut.data.model.Page;
 import io.micronaut.data.model.Pageable;
 import io.micronaut.http.HttpHeaders;
 import io.micronaut.http.HttpResponse;
@@ -11,10 +12,10 @@ import ph.net.see.repository.GenreRepository;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 
 @Validated
 @Controller("/genres")
+@SuppressWarnings("unused")
 public class GenreController {
 
     private final GenreRepository genreRepository;
@@ -41,8 +42,9 @@ public class GenreController {
     }
 
     @Get(value = "/list{?pageable*}")
-    public List<Genre> list(@Valid Pageable pageable) {
-        return genreRepository.findAll(pageable);
+    public Page<Genre> list(@Valid Pageable pageable) {
+        Page<Genre> result = genreRepository.findAll(pageable);
+        return result;
     }
 
     @Post()

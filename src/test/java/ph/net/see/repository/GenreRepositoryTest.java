@@ -7,6 +7,9 @@ import ph.net.see.model.Genre;
 
 import javax.inject.Inject;
 
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @MicronautTest(transactional = false)
@@ -18,8 +21,11 @@ class GenreRepositoryTest {
 
     @Test
     void save() {
-        Genre savedGenre = genreRepository.save("dummy");
+        String genreName = "dummy";
+        Genre savedGenre = genreRepository.save(genreName);
 
-        assertTrue(genreRepository.existsById(savedGenre.getId()), "Genre should exist");
+        Optional<Genre> foundGenre = genreRepository.findById(savedGenre.getId());
+        assertTrue(foundGenre.isPresent(), "Genre should exist");
+        assertEquals(genreName, foundGenre.get().getName(), "Genre should have correct name");
     }
 }
