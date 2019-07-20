@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: ph.net.see
+---
+testFramework: junit
+sourceLanguage: java
